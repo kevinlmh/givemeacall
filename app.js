@@ -19,7 +19,7 @@ app.get('/', function(req, res) {
             <title>Give me a call</title>
         </head>
         <body>
-            <form action='/sms'>
+            <form action='/sms' method='POST'>
                 <input name='From'>
                 <input type='submit' value="Call me!">
             </form>
