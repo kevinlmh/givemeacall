@@ -18,8 +18,13 @@ app.post('/voice', function(req, res) {
 });
 
 app.post('/sms', function(req, res) {
-    console.log('received sms request');
-    console.log(req.body);
+    client.calls.create({
+        url: "http://demo.twilio.com/docs/voice.xml",
+        to: req.body.From,
+        from: "+14158013021",
+    }, function(err, call) {
+        process.stderr.write(call.sid);
+    });
 });
 
 app.listen(app.get('port'), function() {
