@@ -1,13 +1,14 @@
-var express = require('express')
-var twilio = require('twilio')
+var express = require('express');
+var twilio = require('twilio');
 
-var app = express()
+var app = express();
 
+app.set('port', (process.env.PORT || 3000));
 
 app.get('/', function(req, res) {
-    res.end("What are you doing here? You shouldn't be here")
-})
+    res.end("What are you doing here? You shouldn't be here");
+});
 
-app.listen(5000, function() {
-    console.log('app started on port 5000')
-})
+app.listen(app.get('port'), function() {
+    console.log('app started on port', app.get('port'));
+});
