@@ -23,7 +23,7 @@ app.post('/voice', function(req, res) {
 });
 
 app.post('/sms', function(req, res) {
-    if (res.body.From.equals("call me")) {
+    if (res.body.Body.equals("call me")) {
         client.calls.create({
             url: "http://demo.twilio.com/docs/voice.xml",
             to: req.body.From,
