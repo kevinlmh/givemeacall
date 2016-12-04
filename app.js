@@ -8,6 +8,6 @@ app.get('/', function(req, res) {
     res.end("What are you doing here? You shouldn't be here")
 })
 
-app.listen(80, function() {
-    console.log('app started on port 80')
+app.listen(5000, function() {
+    console.log('app started on port 5000')
 })
