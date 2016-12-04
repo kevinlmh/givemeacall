@@ -23,13 +23,21 @@ app.post('/voice', function(req, res) {
 });
 
 app.post('/sms', function(req, res) {
-    client.calls.create({
-        url: "http://demo.twilio.com/docs/voice.xml",
-        to: req.body.From,
-        from: "+14158013021",
-    }, function(err, call) {
-        process.stderr.write(call.sid);
-    });
+    if (res.body.From.equals("call me")) {
+        client.calls.create({
+            url: "http://demo.twilio.com/docs/voice.xml",
+            to: req.body.From,
+            from: "+14158013021",
+        }, function(err, call) {
+            process.stderr.write(call.sid);
+        });
+    } else {
+        res.send('content-type', 'text/xml');
+        res.end(`<?xml version="1.0" encoding="UTF-8" ?> 
+            <Response>
+                <Message>Usage: send 'call me' to call this number or send 'call #number' to call another number.</Message>
+            </Response>`);
+    }
 });
 
 app.listen(app.get('port'), function() {
