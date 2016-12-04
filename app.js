@@ -33,7 +33,7 @@ app.post('/sms', function(req, res) {
             process.stderr.write(call.sid);
         });
     } else {
-        res.send('content-type', 'text/xml');
+        res.set('content-type', 'text/xml');
         res.end(`<?xml version="1.0" encoding="UTF-8" ?> 
             <Response>
                 <Message>Usage: send 'call me' to call this number or send 'call #number' to call another number.</Message>
