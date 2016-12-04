@@ -2,9 +2,14 @@ var express = require('express');
 var twilio = require('twilio');
 var bodyParser = require('body-parser');
 
+var accountSid = process.env.accountSid;
+var authToken = process.env.authToken;
+var client = new twilio.RestClient(accountSid, authToken);
+
 var app = express();
 
 app.set('port', (process.env.PORT || 3000));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
