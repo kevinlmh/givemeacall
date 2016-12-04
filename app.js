@@ -14,19 +14,33 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', function(req, res) {
-    res.end("What are you doing here? You shouldn't be here");
+    res.end(`<html>
+        <head>
+            <title>Give me a call</title>
+        </head>
+        <body>
+            <form action='/sms'>
+                <input name='From'>
+                <input type='submit' value="Call me!">
+            </form>
+        </body>
+    </html>`);
 });
 
-app.post('/voice', function(req, res) {
-    console.log('received voice request');
-    console.log(req.body);
+app.get('/voice', function(req, res) {
+    res.set('content-type', 'text/xml');
+    res.end(`<?xml version="1.0" encoding="UTF-8" ?> 
+            <Response>
+            <Say>Thanks for using call me. You are very welcome!</Say>
+            <Play>http://demo.twilio.com/docs/classic.mp3</Play>
+            </Response>`);
 });
 
 app.post('/sms', function(req, res) {
     console.log('sms from',req.body.From, 'content', req.body.Body);
     if (req.body.Body == "call me") {
         client.calls.create({
-            url: "http://demo.twilio.com/docs/voice.xml",
+            url: "https://givemeacall.herokuapp.com/voice",
             to: req.body.From,
             from: "+14158013021",
         }, function(err, call) {
@@ -40,6 +54,8 @@ app.post('/sms', function(req, res) {
             </Response>`);
     }
 });
+
+app.get('/')
 
 app.listen(app.get('port'), function() {
     console.log('app started on port', app.get('port'));
