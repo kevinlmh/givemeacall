@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
     </html>`);
 });
 
-app.get('/voice', function(req, res) {
+app.post('/voice', function(req, res) {
     res.set('content-type', 'text/xml');
     res.end(`<?xml version="1.0" encoding="UTF-8" ?> 
             <Response>
