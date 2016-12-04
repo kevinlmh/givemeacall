@@ -24,7 +24,7 @@ app.post('/voice', function(req, res) {
 
 app.post('/sms', function(req, res) {
     console.log('sms from',req.body.From, 'content', req.body.Body);
-    if (req.body.Body.equals("call me")) {
+    if (req.body.Body == "call me") {
         client.calls.create({
             url: "http://demo.twilio.com/docs/voice.xml",
             to: req.body.From,
