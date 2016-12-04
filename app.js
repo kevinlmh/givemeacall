@@ -40,6 +40,9 @@ app.get('/voice', function(req, res) {
 app.post('/sms', function(req, res) {
     console.log('sms from',req.body.From, 'content', req.body.Body);
     if (req.body.Body == "call me") {
+        res.set('content-type', 'text/xml');
+        res.end(`<?xml version="1.0" encoding="UTF-8" ?> 
+            <Response></Response>`);
         client.calls.create({
             url: "https://givemeacall.herokuapp.com/voice",
             to: req.body.From,
